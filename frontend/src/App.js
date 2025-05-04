@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import CardRecomenda from "./components/card";
 import Header from "./components/header";
-import imagemLivro from "./assets/livro.png";
+import imagemLivro from "./assets/livro2.png";
 import Pesquisa from "./components/pesquisa";
 import UltimosLancamentos from "./components/ultimosLancamentos";
 
