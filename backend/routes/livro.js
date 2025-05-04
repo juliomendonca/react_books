@@ -1,22 +1,22 @@
 // rotas > livro.js
 
 const { Router } = require("express");
-const { getLivroId, getLivros } = require("../controllers/livro");
+const {
+  putLivro,
+  deleteLivro,
+  getLivroId,
+  getLivros,
+  postLivro,
+} = require("../controllers/livro");
 
 const router = Router();
 
 router.get("/", getLivros).get("/:id", getLivroId);
 
-router.post("/", (req, res) => {
-  res.send("Você fez uma requisição do tipo POST");
-});
+router.post("/", postLivro);
 
-router.patch("/", (req, res) => {
-  res.send("Você fez uma requisição do tipo PATCH");
-});
+router.patch("/:id", putLivro);
 
-router.delete("/", (req, res) => {
-  res.send("Você fez uma requisição do tipo DELETE");
-});
+router.delete("/:id", deleteLivro);
 
 module.exports = router;
