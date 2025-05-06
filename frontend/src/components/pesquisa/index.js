@@ -1,7 +1,9 @@
 import styled from "styled-components";
+import { useEffect } from "react";
 import { useState } from "react";
 
-import { livros } from "./dadosPesquisa.js";
+import { getLivros } from "../../services/livros";
+import { postFavorito } from "../../services/favoritos";
 import Input from "../input";
 
 const PesquisaContainer = styled.section`
@@ -45,13 +47,20 @@ const Resultado = styled.div`
 
 function Pesquisa() {
   const [livrosPesquisados, setLivrosPesquisados] = useState([]);
+  const [livros, setLivros] = useState([]);
 
-  function fazPesquisa(evento) {
-    const textoDigitado = evento.target.value;
-    const resultadoPesquisa = livros.filter((livro) =>
-      livro.nome.toUpperCase().includes(textoDigitado.toUpperCase().trim())
-    );
-    setLivrosPesquisados(resultadoPesquisa);
+  useEffect(() => {
+    fetchLivros();
+  }, []);
+
+  async function fetchLivros() {
+    const livrosDaAPI = await getLivros();
+    setLivros(livrosDaAPI);
+  }
+
+  async function insertFavorito(id) {
+    await postFavorito(id);
+    alert(`Livro de id:${id} inserido!`);
   }
 
   return (
@@ -59,13 +68,19 @@ function Pesquisa() {
       <Titulo>Já sabe por onde começar?</Titulo>
       <SubTitulo>Encontre seu livro em nossa estante.</SubTitulo>
       <Input
-        onChange={(evento) => fazPesquisa(evento)}
+        onChange={(evento) => {
+          const textoDigitado = evento.target.value;
+          const resultadoPesquisa = livros.filter((livro) =>
+            livro.nome.toLowerCase().includes(textoDigitado.toLowerCase())
+          );
+          setLivrosPesquisados(resultadoPesquisa);
+        }}
         type="text"
         placeholder="Digite o nome do livro ou autor"
       />
       {livrosPesquisados.map((livro) => (
-        <Resultado>
-          <img src={livro.src} alt="livro pesquisado" />
+        <Resultado onClick={() => insertFavorito(livro.id)}>
+          <img src={livro.src} alt="livro" />
           <p>{livro.nome}</p>
         </Resultado>
       ))}

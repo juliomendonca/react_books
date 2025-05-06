@@ -1,6 +1,8 @@
-import Logo from "../logo"; // Adjust the path as needed
-import OpcoesHeader from "../opcoesHeader"; // Adjust the path as needed
-import IconesHeader from "../icone"; // Adjust the path as needed
+import { Link } from "react-router-dom";
+
+import Logo from "../logo";
+import OpcoesHeader from "../opcoesHeader";
+import IconesHeader from "../icone";
 
 import styled from "styled-components";
 
@@ -13,7 +15,9 @@ const HeaderContainer = styled.header`
 function Header() {
   return (
     <HeaderContainer>
-      <Logo />
+      <Link to="/">
+        <Logo />
+      </Link>
       <OpcoesHeader />
       <IconesHeader />
     </HeaderContainer>

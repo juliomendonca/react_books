@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-import CardRecomenda from "./components/card";
-import Header from "./components/header";
-import imagemLivro from "./assets/livro2.png";
-import Pesquisa from "./components/pesquisa";
-import UltimosLancamentos from "./components/ultimosLancamentos";
+import imagemLivro from "../assets/livro2.png";
+
+import CardRecomenda from "../components/card";
+import Pesquisa from "../components/pesquisa";
+import UltimosLancamentos from "../components/ultimosLancamentos";
 
 const AppContainer = styled.div`
   background-image: linear-gradient(90deg, #002f52 35%, #326589);
@@ -12,11 +12,10 @@ const AppContainer = styled.div`
   width: 100vw;
 `;
 
-function App() {
+function Home() {
   return (
     <div className="App">
       <AppContainer>
-        <Header />
         <Pesquisa />
         <UltimosLancamentos />
         <CardRecomenda
@@ -30,4 +29,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;
